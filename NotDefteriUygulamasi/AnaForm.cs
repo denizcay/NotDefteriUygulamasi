@@ -100,30 +100,20 @@ namespace NotDefteriUygulamasi
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-            Not secilen;
-            if (lstNotlar.SelectedItem == null)
-                MessageBox.Show("Lütfen bir not seçiniz!");
-            else
-            {
-                secilen = (Not)lstNotlar.SelectedItem;
-                notlar.Remove(secilen);
-                Listele();
-            }
+            Sil();
         }
 
         private void lstNotlar_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode==Keys.Delete)
+            if (e.KeyCode == Keys.Delete)
             {
-                e.SuppressKeyPress = true;
-                btnSil.PerformClick();
+                Sil();
             }
         }
 
         private void btnDuzenle_Click(object sender, EventArgs e)
         {
-            new DuzenleForm((Not)lstNotlar.SelectedItem).ShowDialog();
-            Listele();
+            Duzenle();
         }
 
         private void cbYildiz_CheckedChanged(object sender, EventArgs e)
@@ -134,6 +124,67 @@ namespace NotDefteriUygulamasi
         private void txtMetin_TextChanged(object sender, EventArgs e)
         {
             Listele();
+        }
+
+        private void lstNotlar_MouseDown(object sender, MouseEventArgs e)
+        {
+            int indeks = lstNotlar.IndexFromPoint(e.Location);
+            if (indeks > -1 && e.Button == MouseButtons.Right)
+            {
+                bool isaret = false;
+                lstNotlar.SelectedIndex = indeks;
+                Not not = (Not)lstNotlar.Items[indeks];
+                if (not.Isaret != "")
+                    isaret = true;
+                tsmiFavori.Text = isaret ? "Favorilerden Kaldır" : "Favorilere Ekle";
+                cmsNotlar.Show(Cursor.Position);
+            }
+        }
+
+        private void cmsNotlar_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem == tsmiSil)
+                Sil();
+            else if (e.ClickedItem == tsmiFavori)
+                FavoriGuncelle();
+            else if (e.ClickedItem == tsmiDuzenle)
+                Duzenle();
+        }
+
+        private void Duzenle()
+        {
+            if (lstNotlar.SelectedIndex > -1)
+            {
+                new DuzenleForm((Not)lstNotlar.SelectedItem).ShowDialog();
+                Listele();
+            }
+        }
+
+        private void FavoriGuncelle()
+        {
+            if (lstNotlar.SelectedIndex > -1)
+            {
+                Not not = (Not)(lstNotlar.SelectedItem);
+                if (not.Isaret == "")
+                    not.Isaret = "★";
+                else if (not.Isaret == "★")
+                    not.Isaret = "";
+                Listele();
+            }
+        }
+
+        private void Sil()
+        {
+            Not secilen;
+            if (lstNotlar.SelectedItem == null)
+                MessageBox.Show("Lütfen bir not seçiniz!");
+            else
+            {
+                secilen = (Not)lstNotlar.SelectedItem;
+                notlar.Remove(secilen);
+                Listele();
+            }
+
         }
     }
 }

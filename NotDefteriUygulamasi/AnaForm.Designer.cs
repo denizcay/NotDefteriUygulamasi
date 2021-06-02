@@ -29,6 +29,7 @@ namespace NotDefteriUygulamasi
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnEkle = new System.Windows.Forms.Button();
             this.lstNotlar = new System.Windows.Forms.ListBox();
             this.txtMetin = new System.Windows.Forms.TextBox();
@@ -36,6 +37,11 @@ namespace NotDefteriUygulamasi
             this.label1 = new System.Windows.Forms.Label();
             this.btnDuzenle = new System.Windows.Forms.Button();
             this.btnSil = new System.Windows.Forms.Button();
+            this.cmsNotlar = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiSil = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDuzenle = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFavori = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsNotlar.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnEkle
@@ -57,6 +63,7 @@ namespace NotDefteriUygulamasi
             this.lstNotlar.Size = new System.Drawing.Size(447, 234);
             this.lstNotlar.TabIndex = 1;
             this.lstNotlar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lstNotlar_KeyDown);
+            this.lstNotlar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstNotlar_MouseDown);
             // 
             // txtMetin
             // 
@@ -107,6 +114,35 @@ namespace NotDefteriUygulamasi
             this.btnSil.UseVisualStyleBackColor = true;
             this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
+            // cmsNotlar
+            // 
+            this.cmsNotlar.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsNotlar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiSil,
+            this.tsmiDuzenle,
+            this.tsmiFavori});
+            this.cmsNotlar.Name = "cmsNotlar";
+            this.cmsNotlar.Size = new System.Drawing.Size(213, 104);
+            this.cmsNotlar.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.cmsNotlar_ItemClicked);
+            // 
+            // tsmiSil
+            // 
+            this.tsmiSil.Name = "tsmiSil";
+            this.tsmiSil.Size = new System.Drawing.Size(212, 24);
+            this.tsmiSil.Text = "Sil";
+            // 
+            // tsmiDuzenle
+            // 
+            this.tsmiDuzenle.Name = "tsmiDuzenle";
+            this.tsmiDuzenle.Size = new System.Drawing.Size(212, 24);
+            this.tsmiDuzenle.Text = "Düzenle";
+            // 
+            // tsmiFavori
+            // 
+            this.tsmiFavori.Name = "tsmiFavori";
+            this.tsmiFavori.Size = new System.Drawing.Size(212, 24);
+            this.tsmiFavori.Text = "Favorilere Ekle/Çıkar";
+            // 
             // AnaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
@@ -123,6 +159,7 @@ namespace NotDefteriUygulamasi
             this.Name = "AnaForm";
             this.Text = "NOT DEFTERİ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AnaForm_FormClosing);
+            this.cmsNotlar.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,5 +174,9 @@ namespace NotDefteriUygulamasi
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnDuzenle;
         private System.Windows.Forms.Button btnSil;
+        private System.Windows.Forms.ContextMenuStrip cmsNotlar;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSil;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDuzenle;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFavori;
     }
 }
